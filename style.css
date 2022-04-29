@@ -1,0 +1,35 @@
+body{
+  font-family: 'Roboto', sans-serif;
+}
+
+h1{
+  font-weight: bold;
+  color: #29b1dd;
+}
+
+#header-bottom{
+  background-color: #29b1dd;
+  height: 50%;
+}
+
+#select-icons{
+  width: 150px;
+  cursor: pointer;
+}
+
+.em-col{
+  margin: 20px 0;
+}
+
+.box{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 20px 0;
+  border-radius: 10px;
+}
+
+i{
+  font-size: 40px;
+}
