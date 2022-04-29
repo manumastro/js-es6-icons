@@ -11,14 +11,18 @@ header{
   height: 150px;
 }
 
+#header-top{
+  height: 50%;
+}
+
 #header-bottom{
   background-color: #29b1dd;
+  height: 50%;
 }
 
 main{
-  padding-top: 50px;
   background-color: #dddddd;
-  height: calc(100vh - 150px);
+  height: calc(100% - 150px);
 }
 
 #select-icons{
@@ -43,4 +47,14 @@ main{
 
 i{
   font-size: 40px;
+}
+
+.orange{
+  color: orange;
+}
+.blue{
+  color: blue;
+}
+.green{
+  color: green;
 }
