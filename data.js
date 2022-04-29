@@ -133,4 +133,33 @@ const icons = [
 
 /*****************************PASSAGGI******************************/
 // 1. Creare template HTML e CSS per gli elementi che poi andrò ad aggiungere dinamicamente con JS
-// 2. Visualizzare gli elementi dinamicamente
+// 2. Visualizzare gli elementi dinamicamente, c'è bisogno di: "name", "prefix";
+const row = document.querySelector('.row');
+console.log(row);
+
+icons.forEach((element) => {
+	const {name, prefix} = element;
+	generateBoxs(name, prefix);
+})
+
+function generateBoxs(name, prefix){
+
+	const generateTagI = (name, prefix) => prefix + 'solid' + ' ' + prefix + name.toLowerCase();
+
+	const output = 
+	`
+  <div class="col em-col">
+    <div class="box">
+      <i class="${generateTagI(name, prefix)}"></i>
+      <span>${name.toUpperCase()}</span>
+    </div>
+  </div>
+	`;	
+	console.log(output);
+
+	row.innerHTML += output;
+}
+
+
+
+
