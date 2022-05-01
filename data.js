@@ -135,20 +135,29 @@ const icons = [
 // 1. Creare template HTML e CSS per gli elementi che poi andrò ad aggiungere dinamicamente con JS;
 // 2. Visualizzare gli elementi dinamicamente, c'è bisogno di: "name", "prefix";
 // 3. Colorare le icone in base alla loro proprietà negli oggetti; 
+// 4. Importare i value delle options, confrontarle con i type degli oggetti, e stampare gli oggetti del tipo selezionato
+/*
+**Milestone 3**
+Aggiungere alla pagina una select in cui le options corrispondono ai vari tipi di icone *(animal, vegetable, user)*. Quando l’utente seleziona un tipo dalla select, visualizzare solamente le icone corrispondenti.
+*/
+
+
+seeType(icons);
 
 const row = document.querySelector('.row');
-console.log(row);
+
+
+//console.log(definitivElement);
 
 icons.forEach((element) => {
-	const {name, prefix, colors} = element;
-	const color = element.color;
-	generateBoxs(name, prefix, color);
+	const color = element.color, type = element.type;
+	const {name, prefix} = element;
+	generateBoxs(name, prefix, color, type);
 })
 
-
-
-function generateBoxs(name, prefix, color){
+function generateBoxs(name, prefix, color, type){
 	
+
 	const generateTagI = (name, prefix, color) => prefix + 'solid' + ' ' + prefix + name.toLowerCase() + ' ' + color;
 	const output = 
 	`
@@ -165,3 +174,32 @@ function generateBoxs(name, prefix, color){
 
 }
 
+function seeType(icons){
+	const selectValue = document.querySelector('select').value;
+	//console.log('valore------------>', selectValue);
+	const arrayTypes = ['all', 'animal', 'vegetable', 'user'];
+	const types = arrayTypes[selectValue]; 
+	//console.log('tipo selezionato------------>', types);
+	
+		icons.forEach((element, i) => {
+
+			console.log(types);
+				//console.log('tipo----------->',element.type, 'i--------------->', i);
+
+				if(element.type === 'animal' && types === 'animal'){
+					icons.splice(8, 15);		
+					//console.log(definitivElement);
+				}else if(element.type === 'vegetable' && types === 'vegetable'){
+					icons.splice(0, 8);
+					icons.splice(4, 7);
+					
+				}else if(element.type === 'user' && types === 'user'){
+					icons.splice(0, 12);		
+				}
+			})
+		console.log(icons);
+}
+
+function reset(){
+	//const main = document.querySelector('main').innerHTML = '';
+}

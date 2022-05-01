@@ -22,7 +22,7 @@ header{
 
 main{
   background-color: #dddddd;
-  height: calc(100% - 150px);
+  height: calc(100vh - 150px);
 }
 
 #select-icons{
