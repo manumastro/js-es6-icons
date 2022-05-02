@@ -131,75 +131,42 @@ const icons = [
 	}
 ];
 
-/*****************************PASSAGGI******************************/
-// 1. Creare template HTML e CSS per gli elementi che poi andrò ad aggiungere dinamicamente con JS;
-// 2. Visualizzare gli elementi dinamicamente, c'è bisogno di: "name", "prefix";
-// 3. Colorare le icone in base alla loro proprietà negli oggetti; 
-// 4. Importare i value delle options, confrontarle con i type degli oggetti, e stampare gli oggetti del tipo selezionato
-/*
-**Milestone 3**
-Aggiungere alla pagina una select in cui le options corrispondono ai vari tipi di icone *(animal, vegetable, user)*. Quando l’utente seleziona un tipo dalla select, visualizzare solamente le icone corrispondenti.
-*/
 
+const printIcon = (icon) => {
+	const {name, prefix, family, color} = icon; //5. Estrapolo le proprietà dall'oggetto
 
-seeType(icons);
+	return ` <div class="col em-col">
+						<div class="box">
+							<i class="${family} ${prefix}${name}" style="color:${color}"></i>
+							<span>${name}</span>
+						</div>
+					</div>` //6. Return template literal
+}
 
-const row = document.querySelector('.row');
-
-
-//console.log(definitivElement);
-
-icons.forEach((element) => {
-	const color = element.color, type = element.type;
-	const {name, prefix} = element;
-	generateBoxs(name, prefix, color, type);
-})
-
-function generateBoxs(name, prefix, color, type){
+const printIcons = (iconsToPrint) => { 
+	container.innerHTML = '';		//2. svuoto il container
 	
-
-	const generateTagI = (name, prefix, color) => prefix + 'solid' + ' ' + prefix + name.toLowerCase() + ' ' + color;
-	const output = 
-	`
-  <div class="col em-col">
-    <div class="box">
-      <i class="${generateTagI(name, prefix, color)}"></i>
-      <span>${name.toUpperCase()}</span>
-    </div>
-  </div>
-	`;	
-	//console.log(output);
-
-	row.innerHTML += output;
-
+	iconsToPrint.forEach(icon => {		//3. ciclo forEach per ogni icona
+		container.innerHTML += printIcon(icon);		//4. stampo l'icona "printIcon(icon)"
+	});
 }
 
-function seeType(icons){
-	const selectValue = document.querySelector('select').value;
-	//console.log('valore------------>', selectValue);
-	const arrayTypes = ['all', 'animal', 'vegetable', 'user'];
-	const types = arrayTypes[selectValue]; 
-	//console.log('tipo selezionato------------>', types);
-	
-		icons.forEach((element, i) => {
+const seeType = (change) => {
+	console.log(change.target.value);
 
-			console.log(types);
-				//console.log('tipo----------->',element.type, 'i--------------->', i);
+	let filteredIcons = icons.filter(icon => {
+		//console.log(icon);
+		return icon.type === change.target.value || change.target.value === 'all';		//8. ciclo per verificare se il type dell'icona è uguale al value della select o se è 'all', return se le condizioni sono vere
+	})
 
-				if(element.type === 'animal' && types === 'animal'){
-					icons.splice(8, 15);		
-					//console.log(definitivElement);
-				}else if(element.type === 'vegetable' && types === 'vegetable'){
-					icons.splice(0, 8);
-					icons.splice(4, 7);
-					
-				}else if(element.type === 'user' && types === 'user'){
-					icons.splice(0, 12);		
-				}
-			})
-		console.log(icons);
+	console.log(filteredIcons);
+
+	printIcons(filteredIcons); 		//9. richiamo printIcons passando l'icona "filtrata"
 }
 
-function reset(){
-	//const main = document.querySelector('main').innerHTML = '';
-}
+
+const container = document.querySelector('.row');
+
+const select = document.querySelector('select').addEventListener('change', seeType); //7. scateno un evento al cambio del valore della select
+
+printIcons(icons);		//1. Richiamo la funzione che stamperà le icone, passandole
